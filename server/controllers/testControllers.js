@@ -1,34 +1,61 @@
-// const testRoute = (req, res) => {
+// const testRoute = async (req, res) => {
 //     try {
-//         const category_name = req.params.category_name
+//         const categoryName = req.query.category_name
 
-//         if (!category_name) {
+//         if (!categoryName) {
 //             res.status(400).json({ error: 'Category name is required' })
 //             return
 //         }
 
-//         res.status(200).json({ category_name })
+//         res.status(200).json({ categoryName })
 //     } catch (error) {
 //         console.log(error)
-//         res.status(500).json(error)
+//         res.status(500).json({ errorMessage: error })
 //     }
 // }
+require('dotenv').config()
+const { Pool } = require('pg')
 
-// module.exports = { testRoute }
+const pool = new Pool(
+    {
 
+        user: process.env.POSTGRES_USER,
+        password: process.env.POSTGRES_PASSWORD,
+        host: 'localhost',
+        database: process.env.POSTGRES_DB
+    },
+    console.log(`You are not connected to the database.`)
+)
 
+pool.connect();
 
-
-const testRoute = async (req, res) => {
+const homeProductRoute = async (req, res) => {
     try {
-        const categoryName = req.query.category_name
+        const sql = `
+        SELECT 
+            category.category_name,
+            products.product_id,
+            products.product_name,
+            products.product_desc,
+            products.cat_id
+        FROM 
+            category
+        LEFT JOIN 
+            products 
+        ON 
+            products.cat_id = category.category_id
+        `
 
-        if (!categoryName) {
-            res.status(400).json({ error: 'Category name is required' })
-            return
-        }
-
-        res.status(200).json({ categoryName })
+        pool.query(sql, (err, result) => {
+            if (err) {
+                res.status(500).json({ error: err.message })
+                return
+            }
+            res.json({
+                message: 'success',
+                data: result.rows
+            })
+        })
     } catch (error) {
         console.log(error)
         res.status(500).json({ errorMessage: error })
@@ -39,6 +66,4 @@ const testRoute = async (req, res) => {
 
 
 
-
-
-module.exports = { testRoute }
+module.exports = { homeProductRoute }

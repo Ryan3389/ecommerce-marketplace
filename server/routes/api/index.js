@@ -1,13 +1,7 @@
-// const router = require('express').Router()
-// const testRoutes = require('./testRoutes')
+const router = require('express').Router()
+const productRoutes = require('./productRoutes')
 
 // router.use('/category_name', testRoutes)
-
-// module.exports = router
-const router = require('express').Router()
-const testRoutes = require('./testRoutes')
-
-// router.use('/test', testRoutes)
-router.use('/category_name', testRoutes)
+router.use('/products', productRoutes)
 
 module.exports = router
