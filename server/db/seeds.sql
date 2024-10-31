@@ -1,9 +1,9 @@
 INSERT INTO category (category_name)
 VALUES 
 ('Electronics'),
-('Pet Supplies'),
-('Home & Furniture'),
-('Sports & Outdoors');
+('Pets'),
+('Furniture'),
+('Sports');
 
 INSERT INTO products (product_name, product_desc, cat_id)
 VALUES 

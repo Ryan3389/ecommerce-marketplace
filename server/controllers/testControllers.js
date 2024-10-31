@@ -62,8 +62,88 @@ const homeProductRoute = async (req, res) => {
     }
 }
 
+// const categoryRoutes = (req, res) => {
+//     try {
+
+//         const categoryName = req.query.category_name
+
+//         if (!categoryName) {
+//             res.status(400).json({ error: 'Category name is required' });
+//             return;
+//         }
+
+//         const sql = `
+//     SELECT 
+//       category.category_id, 
+//       category.category_name, 
+//       products.product_name, 
+//       products.product_desc, 
+//       products.cat_id
+//     FROM category
+//     LEFT JOIN products
+//       ON products.cat_id = category.category_id
+//     WHERE category.category_name = $1;
+//   `;
+
+//         pool.query(sql, [categoryName], (err, result) => {
+//             if (err) {
+//                 res.status(500).json({ error: err.message });
+//                 return;
+//             }
+//             res.json({
+//                 message: 'success',
+//                 data: result.rows
+//             });
+//         });
+//     } catch (error) {
+//         console.log(error)
+//         res.status(200).json({ errorMessage: error })
+//     }
+// }
+const categoryRoutes = (req, res) => {
+    try {
+        const categoryName = req.query.category_name
+
+        if (!categoryName) {
+            res.status(400).json({ error: 'Category name is required' })
+            return
+        }
+
+        const sql = `
+        SELECT
+            category.category_name,
+            products.product_id,
+            products.product_name,
+            products.product_desc,
+            products.cat_id
+        FROM
+            category
+        LEFT JOIN
+            products
+        ON
+            products.cat_id = category.category_id
+        WHERE 
+            category.category_name = $1
+`
+
+        pool.query(sql, [categoryName], (err, result) => {
+            if (err) {
+                res.status(500).json({ error: err.message })
+                return
+            }
+            res.json({
+                message: 'Success',
+                data: result.rows
+            })
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(200).json({ errorMessage: error })
+    }
+}
 
 
 
+module.exports = { homeProductRoute, categoryRoutes }
 
-module.exports = { homeProductRoute }
+
