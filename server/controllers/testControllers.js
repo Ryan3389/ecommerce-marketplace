@@ -24,7 +24,7 @@ const pool = new Pool(
         host: 'localhost',
         database: process.env.POSTGRES_DB
     },
-    console.log(`You are not connected to the database.`)
+    console.log(`You are now connected to the database.`)
 )
 
 pool.connect();
