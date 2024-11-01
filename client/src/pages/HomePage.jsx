@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-
+import ProductCard from '../components/ProductCard';
 const HomePage = () => {
     const [homeProductData, setHomeProductData] = useState(null)
 
@@ -27,35 +27,49 @@ const HomePage = () => {
     if (!homeProductData) return <div>Loading...</div>
 
     return (
-
-
         <section>
-            {homeProductData.data.map((product, index) => (
-                <div key={index}>
-                    <h2>{product.product_name}</h2>
-                    <p>{product.product_desc}</p>
+            <div className="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
+                <div className="md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0">
+                    {homeProductData.data.map((product, index) => (
+                        <article key={index} className='border-2 p-5'>
+                            <ProductCard
+                                title={product.product_name}
+                                desc={product.product_desc}
+                            />
+                        </article>
+                    ))}
                 </div>
-            ))}
+            </div>
+
+
+
         </section>
+
+        // <section>
+        //     <div className="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
+        //         <div className="md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0">
+        //             {homeProductData.data.map((product, index) => (
+        //                 <article key={index} className='border-2 p-5'>
+        //                     <h3 className='mb-4 text-xl font-semibold'>{product.product_name}</h3>
+        //                     <p>{product.product_desc}</p>
+        //                     <p>$29.99</p>
+        //                     <button className='py-2'>Add to Cart</button>
+        //                 </article>
+        //             ))}
+        //         </div>
+        //     </div>
+
+
+
+        // </section>
 
 
     )
-    // if (!homeProductData) return <div>Loading...</div>
-
-    // return (
-    //     <div>
-    //         <h1>Home Products</h1>
-    //         <ul>
-    //             {homeProductData.data.map((product, index) => (
-    //                 <li key={index}>
-    //                     <h2>{product.product_name}</h2>
-    //                     <p>{product.product_desc}</p>
-    //                 </li>
-    //             ))}
-    //         </ul>
-    //     </div>
-    // )
 }
+
+
+
+
 
 export default HomePage;
 
