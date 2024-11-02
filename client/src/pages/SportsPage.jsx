@@ -1,10 +1,10 @@
 import FilteredProducts from "../components/FilteredProducts"
-const ElectronicsPage = () => {
+const SportsPage = () => {
     return (
         <FilteredProducts
-            categoryName='Electronics'
+            categoryName='Sports'
         />
     )
 }
 
-export default ElectronicsPage
+export default SportsPage

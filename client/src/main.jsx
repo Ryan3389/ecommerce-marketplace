@@ -6,6 +6,9 @@ import './index.css'
 
 import HomePage from './pages/HomePage.jsx'
 import ElectronicsPage from './pages/ElectronicsPage.jsx'
+import PetsPage from './pages/PetsPage.jsx';
+import FurniturePage from './pages/FurniturePage.jsx';
+import SportsPage from './pages/SportsPage.jsx';
 
 
 const router = createBrowserRouter([
@@ -22,6 +25,18 @@ const router = createBrowserRouter([
         path: '/electronics',
         element: <ElectronicsPage />
       },
+      {
+        path: '/pets',
+        element: <PetsPage />
+      },
+      {
+        path: '/furniture',
+        element: <FurniturePage />
+      },
+      {
+        path: '/sports',
+        element: <SportsPage />
+      }
     ]
   }
 ])
