@@ -4,9 +4,9 @@ const FilterButtons = () => {
         <span className="flex justify-center">
             <Link to='/' className="mx-5">All</Link>
             <Link to='/electronics' className="mx-5">Electronics</Link>
-            <Link className="mx-5">Pets</Link>
-            <Link className="mx-5">Furniture</Link>
-            <Link className="mx-5">Sports</Link>
+            <Link to='/pets' className="mx-5">Pets</Link>
+            <Link to='/furniture' className="mx-5">Furniture</Link>
+            <Link to='/sports' className="mx-5">Sports</Link>
 
         </span>
 
