@@ -35,6 +35,8 @@ const FilteredProducts = ({ categoryName }) => {
                             <ProductCard
                                 title={product.product_name}
                                 desc={product.product_desc}
+                                productData={productData}
+                                product={product}
                             />
                         </article>
                     ))}

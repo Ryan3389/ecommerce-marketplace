@@ -9,6 +9,7 @@ import ElectronicsPage from './pages/ElectronicsPage.jsx'
 import PetsPage from './pages/PetsPage.jsx';
 import FurniturePage from './pages/FurniturePage.jsx';
 import SportsPage from './pages/SportsPage.jsx';
+import CartPage from './pages/CartPage.jsx';
 
 
 const router = createBrowserRouter([
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: '/sports',
         element: <SportsPage />
+      },
+      {
+        path: '/cart',
+        element: <CartPage />
       }
     ]
   }
