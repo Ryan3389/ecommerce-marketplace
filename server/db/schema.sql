@@ -12,6 +12,8 @@ CREATE TABLE products (
     product_id SERIAL PRIMARY KEY,
     product_name VARCHAR(30),
     product_desc VARCHAR(255),
+    product_price DECIMAL,
     cat_id INTEGER,
     FOREIGN KEY (cat_id) REFERENCES category(category_id)
 );
+

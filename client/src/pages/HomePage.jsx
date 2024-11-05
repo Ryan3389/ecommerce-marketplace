@@ -1,8 +1,20 @@
 import { useEffect, useState } from 'react';
 import ProductCard from '../components/ProductCard';
 
+import { useSelector, useDispatch } from 'react-redux';
+import { addItem, removeItem } from '../redux/cartSlice';
+
 const HomePage = () => {
     const [homeProductData, setHomeProductData] = useState(null)
+
+    const cart = useSelector(state => state.cart.items)
+    const dispatch = useDispatch()
+
+
+    useEffect(() => {
+        localStorage.setItem('Shopping Cart', JSON.stringify(cart))
+    }, [cart])
+
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -16,8 +28,7 @@ const HomePage = () => {
                 }
 
                 const data = await response.json()
-                setHomeProductData(data); // Store the fetched data
-
+                setHomeProductData(data)
             } catch (error) {
                 console.error("Error fetching data", error)
             }
@@ -36,8 +47,9 @@ const HomePage = () => {
                             <ProductCard
                                 title={product.product_name}
                                 desc={product.product_desc}
-                                product={product}
+                                price={product.product_price}
                             />
+                            <button onClick={() => dispatch(addItem(product))} className='py-2'>Add to Cart</button>
                         </article>
                     ))}
                 </div>
