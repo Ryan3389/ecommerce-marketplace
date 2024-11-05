@@ -15,3 +15,4 @@ CREATE TABLE products (
     cat_id INTEGER,
     FOREIGN KEY (cat_id) REFERENCES category(category_id)
 );
+

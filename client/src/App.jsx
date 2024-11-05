@@ -14,14 +14,5 @@ const App = () => {
   )
 }
 
-// const App = () => {
-//   return (
-//     <>
-//       <Navbar />
-//       <FilterButtons />
-//       <Outlet />
-//     </>
-//   )
-// }
 
 export default App

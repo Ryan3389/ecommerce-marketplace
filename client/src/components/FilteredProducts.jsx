@@ -1,11 +1,24 @@
 import { useEffect, useState } from 'react';
 import ProductCard from './ProductCard';
 
+//TEST
+import { useSelector, useDispatch } from 'react-redux';
+import { addItem, removeItem } from '../redux/cartSlice';
+
 const FilteredProducts = ({ categoryName }) => {
     const [category, setCategory] = useState({
         category_name: categoryName
     })
     const [productData, setProductData] = useState(null)
+
+    //TEST
+    const cart = useSelector(state => state.cart.items)
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        localStorage.setItem('Shopping Cart', JSON.stringify(cart))
+    }, [cart])
+
     useEffect(() => {
         const fetchData = async () => {
             const queryParams = new URLSearchParams(category).toString()
@@ -38,6 +51,7 @@ const FilteredProducts = ({ categoryName }) => {
                                 productData={productData}
                                 product={product}
                             />
+                            <button onClick={() => dispatch(addItem(product))} className='py-2'>Add to Cart</button>
                         </article>
                     ))}
                 </div>
