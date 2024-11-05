@@ -10,11 +10,11 @@ const HomePage = () => {
     const cart = useSelector(state => state.cart.items)
     const dispatch = useDispatch()
 
-    //NEW
+
     useEffect(() => {
         localStorage.setItem('Shopping Cart', JSON.stringify(cart))
     }, [cart])
-    //NEW
+
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -47,7 +47,7 @@ const HomePage = () => {
                             <ProductCard
                                 title={product.product_name}
                                 desc={product.product_desc}
-                                product={product}
+                                price={product.product_price}
                             />
                             <button onClick={() => dispatch(addItem(product))} className='py-2'>Add to Cart</button>
                         </article>

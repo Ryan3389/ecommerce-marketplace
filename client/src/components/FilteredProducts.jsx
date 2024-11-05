@@ -48,8 +48,7 @@ const FilteredProducts = ({ categoryName }) => {
                             <ProductCard
                                 title={product.product_name}
                                 desc={product.product_desc}
-                                productData={productData}
-                                product={product}
+                                price={product.product_price}
                             />
                             <button onClick={() => dispatch(addItem(product))} className='py-2'>Add to Cart</button>
                         </article>
