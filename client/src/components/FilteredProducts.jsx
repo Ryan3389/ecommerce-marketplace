@@ -15,9 +15,9 @@ const FilteredProducts = ({ categoryName }) => {
     const cart = useSelector(state => state.cart.items)
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        localStorage.setItem('Shopping Cart', JSON.stringify(cart))
-    }, [cart])
+    // useEffect(() => {
+    //     localStorage.setItem('Shopping Cart', JSON.stringify(cart))
+    // }, [cart])
 
     useEffect(() => {
         const fetchData = async () => {
