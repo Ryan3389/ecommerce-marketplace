@@ -1,3 +1,5 @@
+
+
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
@@ -12,6 +14,7 @@ const cartSlice = createSlice({
             const item = action.payload
             if (state.items[item.product_id]) {
                 state.items[item.product_id].quantity += 1
+                state.items[item.product_id].product_price += item.product_price
             } else {
                 state.items[item.product_id] = { ...item, quantity: 1 }
             }
