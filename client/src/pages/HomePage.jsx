@@ -9,12 +9,7 @@ const HomePage = () => {
 
     const cart = useSelector(state => state.cart.items)
     const dispatch = useDispatch()
-
-
-
-    // useEffect(() => {
-    //     localStorage.setItem('Shopping Cart', JSON.stringify(cart))
-    // }, [cart])
+    console.log(cart)
 
 
     useEffect(() => {
