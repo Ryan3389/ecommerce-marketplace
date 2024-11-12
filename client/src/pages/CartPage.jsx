@@ -3,6 +3,11 @@ import { removeItem } from '../redux/cartSlice';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
+//Stripe imports 
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+import CheckoutForm from './CheckoutForm'
+
 const CartPage = () => {
     const cart = useSelector(state => state.cart.items)
     const dispatch = useDispatch()
@@ -13,6 +18,7 @@ const CartPage = () => {
     }
 
     useEffect(() => {
+
         const totalPrice = Object.values(cart).reduce((acc, item) => acc + item.sum, 0)
         console.log('Total Price: ', totalPrice.toFixed(2))
         setCheckoutPrice(totalPrice.toFixed(2))
@@ -32,17 +38,14 @@ const CartPage = () => {
                     ))}
 
                 </div>
-                {/* <span className='flex justify-center flex-col'> */}
-                {checkoutPrice > 0 ?
-                    <>
-                        <p className='flex justify-center'>Your total is ${checkoutPrice}</p>
-                        <div className='w-[80%] m-auto'>
+                <span className='flex justify-center flex-col'>
+                    {checkoutPrice > 0 ?
+                        <>
+                            <p className='flex justify-center'>Your total is ${checkoutPrice}</p>
                             <Link to='/checkout' className='flex justify-center border-2 w-[30%] m-auto checkout-btn'>Checkout</Link>
-                        </div>
-
-                    </>
-                    : <p>Your cart is empty</p>}
-                {/* </span> */}
+                        </>
+                        : <p>Your cart is empty</p>}
+                </span>
             </div>
         </section>
     )
