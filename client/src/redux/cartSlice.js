@@ -24,11 +24,10 @@ const cartSlice = createSlice({
             if (state.items[productId].quantity > 1) {
                 state.items[productId].quantity -= 1
                 state.items[productId].sum -= price
-                // state.items[productId].sum -= state.items[productId].product_price
             } else {
                 delete state.items[productId]
             }
-        }
+        },
     }
 })
 
