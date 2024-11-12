@@ -1,4 +1,6 @@
 require('dotenv').config()
+const stripe = require('stripe')(process.env.STRIPE_KEY);
+require('dotenv').config()
 const { Pool } = require('pg')
 
 const pool = new Pool(
@@ -48,44 +50,7 @@ const homeProductRoute = async (req, res) => {
     }
 }
 
-// const categoryRoutes = (req, res) => {
-//     try {
 
-//         const categoryName = req.query.category_name
-
-//         if (!categoryName) {
-//             res.status(400).json({ error: 'Category name is required' });
-//             return;
-//         }
-
-//         const sql = `
-//     SELECT 
-//       category.category_id, 
-//       category.category_name, 
-//       products.product_name, 
-//       products.product_desc, 
-//       products.cat_id
-//     FROM category
-//     LEFT JOIN products
-//       ON products.cat_id = category.category_id
-//     WHERE category.category_name = $1;
-//   `;
-
-//         pool.query(sql, [categoryName], (err, result) => {
-//             if (err) {
-//                 res.status(500).json({ error: err.message });
-//                 return;
-//             }
-//             res.json({
-//                 message: 'success',
-//                 data: result.rows
-//             });
-//         });
-//     } catch (error) {
-//         console.log(error)
-//         res.status(200).json({ errorMessage: error })
-//     }
-// }
 const categoryRoutes = (req, res) => {
     try {
         const categoryName = req.query.category_name
@@ -129,8 +94,33 @@ const categoryRoutes = (req, res) => {
     }
 }
 
+const paymentRoute = async (req, res) => {
+    try {
+        const paymentIntent = await stripe.paymentIntents.create({
+            amount: 1000, // specify amount in cents
+            currency: 'usd',
+        });
+        res.json({ clientSecret: paymentIntent.client_secret }); // Ensure JSON response
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' }); // Return an error response if needed
+    }
+}
+const confirmRoute = (req, res) => {
+    const paymentIntentId = req.query.payment_intent;
+    const clientSecret = req.query.payment_intent_client_secret;
+    const status = req.query.redirect_status;
 
+    // Implement logic based on the payment status
+    if (status === 'succeeded') {
+        // Handle successful payment here
+        res.send("Payment succeeded!");
+    } else {
+        // Handle other cases or errors
+        res.send("Payment failed or was cancelled.");
+    }
+}
 
-module.exports = { homeProductRoute, categoryRoutes }
+module.exports = { homeProductRoute, categoryRoutes, paymentRoute, confirmRoute }
 
 

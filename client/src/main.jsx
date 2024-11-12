@@ -10,6 +10,8 @@ import PetsPage from './pages/PetsPage.jsx';
 import FurniturePage from './pages/FurniturePage.jsx';
 import SportsPage from './pages/SportsPage.jsx';
 import CartPage from './pages/CartPage.jsx';
+import ConfirmPage from './pages/ConfirmPage.jsx';
+import CheckoutForm from './pages/CheckoutForm.jsx';
 
 
 const router = createBrowserRouter([
@@ -41,6 +43,14 @@ const router = createBrowserRouter([
       {
         path: '/cart',
         element: <CartPage />
+      },
+      {
+        path: '/confirm',
+        element: <ConfirmPage />
+      },
+      {
+        path: '/checkout',
+        element: <CheckoutForm />
       }
     ]
   }
