@@ -120,11 +120,12 @@ const confirmRoute = (req, res) => {
     // Implement logic based on the payment status
     if (status === 'succeeded') {
         // Handle successful payment here
-        res.status(200).json({ message: "Payment succeeded!" });
+        res.status(200).json({ message: 'Payment successful' })
         // res.send("Payment succeeded!");
     } else {
         // Handle other cases or errors
-        res.status(200).json({ message: "Payment failed or was cancelled." });
+        res.status(400).json({ message: 'Payment failed' })
+        // res.send("Payment failed or was cancelled.");
     }
 }
 
