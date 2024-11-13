@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { removeItem } from '../redux/cartSlice';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 //Stripe imports 
 import { Elements } from '@stripe/react-stripe-js';
@@ -12,6 +13,7 @@ const CartPage = () => {
     const cart = useSelector(state => state.cart.items)
     const dispatch = useDispatch()
     const [checkoutPrice, setCheckoutPrice] = useState(null)
+    const navigate = useNavigate()
 
     const removeProduct = (productId) => {
         dispatch(removeItem(productId))
@@ -20,9 +22,15 @@ const CartPage = () => {
     useEffect(() => {
 
         const totalPrice = Object.values(cart).reduce((acc, item) => acc + item.sum, 0)
-        console.log('Total Price: ', totalPrice.toFixed(2))
         setCheckoutPrice(totalPrice.toFixed(2))
+        localStorage.setItem('Total Price', totalPrice.toFixed(2))
     }, [cart])
+
+    const handleClick = () => {
+        navigate('/checkout', {
+            state: { price: checkoutPrice }
+        })
+    }
 
     return (
         <section>
@@ -42,6 +50,7 @@ const CartPage = () => {
                     {checkoutPrice > 0 ?
                         <>
                             <p className='flex justify-center'>Your total is ${checkoutPrice}</p>
+                            {/* <button onClick={handleClick} className='flex justify-center border-2 w-[30%] m-auto checkout-btn'>Checkout</button> */}
                             <Link to='/checkout' className='flex justify-center border-2 w-[30%] m-auto checkout-btn'>Checkout</Link>
                         </>
                         : <p>Your cart is empty</p>}
