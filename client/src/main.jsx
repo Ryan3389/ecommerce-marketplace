@@ -11,6 +11,7 @@ import FurniturePage from './pages/FurniturePage.jsx';
 import SportsPage from './pages/SportsPage.jsx';
 import CartPage from './pages/CartPage.jsx';
 import CheckoutPage from './pages/CheckoutForm.jsx';
+import ConfirmPage from './pages/ConfirmPage.jsx';
 
 
 const router = createBrowserRouter([
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
       {
         path: '/checkout',
         element: <CheckoutPage />
+      },
+      {
+        path: '/confirm',
+        element: <ConfirmPage />
       }
     ]
   }

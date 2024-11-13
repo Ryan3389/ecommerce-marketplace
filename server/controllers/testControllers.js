@@ -95,14 +95,20 @@ const categoryRoutes = (req, res) => {
 }
 
 const paymentRoute = async (req, res) => {
+    // console.log(req.body.price)
+    const { price } = req.body
+    const priceInCents = price * 100
+
     try {
         const paymentIntent = await stripe.paymentIntents.create({
-            amount: 1000, // specify amount in cents
+            amount: priceInCents, // specify amount in cents
             currency: 'usd',
         });
-        res.json({ clientSecret: paymentIntent.client_secret }); // Ensure JSON response
+        console.log('Payment successful')
+        res.json({ clientSecret: paymentIntent.client_secret, totalPrice: paymentIntent.amount }); // Ensure JSON response
     } catch (error) {
         console.error(error);
+        console.log('Payment denied')
         res.status(500).json({ message: 'Server error' }); // Return an error response if needed
     }
 }
@@ -114,10 +120,11 @@ const confirmRoute = (req, res) => {
     // Implement logic based on the payment status
     if (status === 'succeeded') {
         // Handle successful payment here
-        res.send("Payment succeeded!");
+        res.status(200).json({ message: "Payment succeeded!" });
+        // res.send("Payment succeeded!");
     } else {
         // Handle other cases or errors
-        res.send("Payment failed or was cancelled.");
+        res.status(200).json({ message: "Payment failed or was cancelled." });
     }
 }
 
