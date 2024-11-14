@@ -1,36 +1,32 @@
+//imports hooks
 import { useSelector, useDispatch } from 'react-redux';
-import { removeItem } from '../redux/cartSlice';
+import { removeItem, clearCart } from '../redux/cartSlice';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
 
-//Stripe imports 
-import { Elements } from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
-import CheckoutForm from './CheckoutForm'
 
+//Cart page function
 const CartPage = () => {
+    //Redux hooks for managing store
     const cart = useSelector(state => state.cart.items)
     const dispatch = useDispatch()
+
+    //Store checkout price 
     const [checkoutPrice, setCheckoutPrice] = useState(null)
-    const navigate = useNavigate()
+
+
 
     const removeProduct = (productId) => {
         dispatch(removeItem(productId))
     }
 
     useEffect(() => {
-
+        //Calculate total price
         const totalPrice = Object.values(cart).reduce((acc, item) => acc + item.sum, 0)
         setCheckoutPrice(totalPrice.toFixed(2))
         localStorage.setItem('Total Price', totalPrice.toFixed(2))
     }, [cart])
 
-    const handleClick = () => {
-        navigate('/checkout', {
-            state: { price: checkoutPrice }
-        })
-    }
 
     return (
         <section>
@@ -50,8 +46,9 @@ const CartPage = () => {
                     {checkoutPrice > 0 ?
                         <>
                             <p className='flex justify-center'>Your total is ${checkoutPrice}</p>
-                            {/* <button onClick={handleClick} className='flex justify-center border-2 w-[30%] m-auto checkout-btn'>Checkout</button> */}
+
                             <Link to='/checkout' className='flex justify-center border-2 w-[30%] m-auto checkout-btn'>Checkout</Link>
+                            {/* <button onClick={() => dispatch(clearCart(cart))}>Clear Cart</button> */}
                         </>
                         : <p>Your cart is empty</p>}
                 </span>
