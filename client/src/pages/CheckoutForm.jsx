@@ -15,9 +15,12 @@ function CheckoutPage() {
     console.log('Cart before payment:', cart)
 
     const checkoutPrice = JSON.parse(localStorage.getItem('Total Price'))
+
     const [totalPrice, setTotalPrice] = useState({
         price: checkoutPrice
     })
+
+
 
     const [clientSecret, setClientSecret] = useState('');
 
@@ -55,12 +58,14 @@ function CheckoutPage() {
             },
         });
 
+        // if (result.paymentIntent.status === 'succeeded') {
+        //     dispatch(clearCart(cart))
+        // }
         if (result.error) {
-            console.log(result.error.message);
-        } else if (result.paymentIntent.status === 'succeeded') {
-            dispatch(clearCart());
-            console.log('Cart after payment: ', cart)
+            throw new Error(result.error.message)
         }
+
+
 
 
     }
@@ -73,7 +78,7 @@ function CheckoutPage() {
             <>
                 <form onSubmit={(event) => handleFormSubmit(event, stripe, elements)}>
                     <PaymentElement />
-                    <button disabled={!stripe}>Submit</button>
+                    <button disabled={!stripe} onClick={() => dispatch(clearCart(cart))}>Submit</button>
                 </form>
             </>
         )
