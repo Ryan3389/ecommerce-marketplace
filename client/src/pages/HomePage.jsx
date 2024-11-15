@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import ProductCard from '../components/ProductCard';
+//  `../../public/${product.product_img}`
 
 import { useSelector, useDispatch } from 'react-redux';
 import { addItem, removeItem } from '../redux/cartSlice';
@@ -24,6 +25,7 @@ const HomePage = () => {
                 }
 
                 const data = await response.json()
+                console.log(data)
                 setHomeProductData(data)
             } catch (error) {
                 console.error("Error fetching data", error)
@@ -44,6 +46,7 @@ const HomePage = () => {
                                 title={product.product_name}
                                 desc={product.product_desc}
                                 price={product.product_price}
+                                img={product.product_img}
                             />
                             <button onClick={() => dispatch(addItem(product))} className='py-2'>Add to Cart</button>
                         </article>
