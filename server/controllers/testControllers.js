@@ -25,6 +25,7 @@ const homeProductRoute = async (req, res) => {
             products.product_name,
             products.product_desc,
             products.product_price,
+            products.product_img,
             products.cat_id
         FROM 
             category
@@ -67,6 +68,7 @@ const categoryRoutes = (req, res) => {
             products.product_name,
             products.product_desc,
             products.product_price,
+            products.product_img,
             products.cat_id
         FROM
             category

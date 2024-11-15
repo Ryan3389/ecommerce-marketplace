@@ -15,9 +15,7 @@ const FilteredProducts = ({ categoryName }) => {
     const cart = useSelector(state => state.cart.items)
     const dispatch = useDispatch()
 
-    // useEffect(() => {
-    //     localStorage.setItem('Shopping Cart', JSON.stringify(cart))
-    // }, [cart])
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -30,6 +28,7 @@ const FilteredProducts = ({ categoryName }) => {
                     console.log('Network error')
                 }
                 const data = await response.json()
+                console.log(data)
                 setProductData(data)
 
             } catch (error) {
@@ -49,6 +48,7 @@ const FilteredProducts = ({ categoryName }) => {
                                 title={product.product_name}
                                 desc={product.product_desc}
                                 price={product.product_price}
+                                img={product.product_img}
                             />
                             <button onClick={() => dispatch(addItem(product))} className='py-2'>Add to Cart</button>
                         </article>
