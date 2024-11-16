@@ -5,22 +5,17 @@ import { useStripe, useElements, PaymentElement } from '@stripe/react-stripe-js'
 
 import { useSelector, useDispatch } from 'react-redux';
 import { clearCart } from '../redux/cartSlice';
-import ConfirmPage from './ConfirmPage'
+
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_KEY);
 
 function CheckoutPage() {
-    const dispatch = useDispatch()
     const cart = useSelector(state => state.cart.items)
-    console.log('Cart before payment:', cart)
-
     const checkoutPrice = JSON.parse(localStorage.getItem('Total Price'))
 
     const [totalPrice, setTotalPrice] = useState({
         price: checkoutPrice
     })
-
-
 
     const [clientSecret, setClientSecret] = useState('');
 
@@ -54,13 +49,10 @@ function CheckoutPage() {
         const result = await stripe.confirmPayment({
             elements,
             confirmParams: {
-                return_url: 'http://localhost:3001/api/create-payment-intent/confirm'
+                return_url: 'http://localhost:3000/confirm'
             },
         });
 
-        // if (result.paymentIntent.status === 'succeeded') {
-        //     dispatch(clearCart(cart))
-        // }
         if (result.error) {
             throw new Error(result.error.message)
         }
@@ -70,6 +62,7 @@ function CheckoutPage() {
 
     }
 
+
     const PaymentForm = () => {
         const stripe = useStripe();
         const elements = useElements();
@@ -78,7 +71,7 @@ function CheckoutPage() {
             <>
                 <form onSubmit={(event) => handleFormSubmit(event, stripe, elements)}>
                     <PaymentElement />
-                    <button disabled={!stripe} onClick={() => dispatch(clearCart(cart))}>Submit</button>
+                    <button disabled={!stripe}>Submit</button>
                 </form>
             </>
         )
