@@ -8,6 +8,7 @@ const ProductCard = ({ title, desc, price, img }) => {
             <p>{desc}</p>
             <p>${price}</p>
             <img src={`/${img}`} alt="" />
+            {/* <button onClick={() => clickEvent} className='p-2 bg-btnBackground text-btnText hover:bg-btnHover'>Add to Cart</button> */}
         </>
     )
 }
