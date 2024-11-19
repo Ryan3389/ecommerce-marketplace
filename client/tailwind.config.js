@@ -7,7 +7,10 @@ export default {
   theme: {
     extend: {
       colors: {
-        navBackground: '#99CCCC'
+        navBackground: '#99CCCC',
+        btnBackground: '#007F99',
+        btnHover: '#005F73',
+        btnText: '#FFFFFF'
       }
     },
   },

@@ -42,14 +42,20 @@ const HomePage = () => {
                 <div className="md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0">
                     {homeProductData.data.map((product) => (
                         <article key={product.product_id} className='border-2 p-5'>
-                            <ProductCard
-                                title={product.product_name}
-                                desc={product.product_desc}
-                                price={product.product_price}
-                                img={product.product_img}
-                            />
-                            <button onClick={() => dispatch(addItem(product))} className='py-2'>Add to Cart</button>
+                            <div className='product-card'>
+                                <ProductCard
+                                    title={product.product_name}
+                                    desc={product.product_desc}
+                                    price={product.product_price}
+                                    img={product.product_img}
+                                />
+                            </div>
+                            <div className='btn-container'>
+                                <button onClick={() => dispatch(addItem(product))} className='p-2 bg-btnBackground text-btnText hover:bg-btnHover'>Add to Cart</button>
+                            </div>
+
                         </article>
+
                     ))}
                 </div>
             </div>
