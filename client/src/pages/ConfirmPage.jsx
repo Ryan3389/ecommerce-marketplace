@@ -7,9 +7,13 @@ const ConfirmPage = () => {
     const cart = useSelector(state => state.cart.items)
     return (
         <>
-            <h1>Payment recieved</h1>
-            <p>Thank you for using marketplace </p>
-            <Link to='/' onClick={() => dispatch(clearCart(cart))}>Home</Link>
+            <section className='confirm-payment'>
+                <h1>Payment recieved</h1>
+                <p>Thank you for using marketplace </p>
+
+                <Link className='bg-btnBackground' to='/' onClick={() => dispatch(clearCart(cart))}>Home</Link>
+
+            </section>
         </>
     )
 }
