@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom"
 import Navbar from "./components/Navbar"
-import FilterButtons from "./components/filterButtons"
+// import FilterButtons from "./components/filterButtons"
+import FilterButtons from './components/FilterButtons'
 
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
