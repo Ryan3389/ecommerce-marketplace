@@ -1,7 +1,7 @@
-DROP DATABASE IF EXISTS marketplace_db;
-CREATE DATABASE marketplace_db;
+DROP DATABASE IF EXISTS marketplace_db_yl07;
+CREATE DATABASE marketplace_db_yl07;
 
-\c marketplace_db;
+\c marketplace_db_yl07;
 
 CREATE TABLE category (
     category_id SERIAL PRIMARY KEY,
