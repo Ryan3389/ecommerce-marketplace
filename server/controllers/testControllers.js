@@ -3,18 +3,30 @@ const stripe = require('stripe')(process.env.STRIPE_KEY);
 require('dotenv').config()
 const { Pool } = require('pg')
 
-const pool = new Pool(
-    {
 
-        user: process.env.POSTGRES_USER,
-        password: process.env.POSTGRES_PASSWORD,
-        host: 'localhost',
-        database: process.env.POSTGRES_DB
-    },
-    console.log(`You are now connected to the database.`)
-)
+const pool = new Pool({
+    connectionString: process.env.DB_URL,
+    ssl: {
+        rejectUnauthorized: false
+    }
+})
 
-pool.connect();
+pool.connect()
+    .then(() => console.log('Connected to DB'))
+    .catch(err => console.error("Error connecting to DB", err))
+
+// const pool = new Pool(
+//     {
+
+//         user: process.env.POSTGRES_USER,
+//         password: process.env.POSTGRES_PASSWORD,
+//         host: 'localhost',
+//         database: process.env.POSTGRES_DB
+//     },
+//     console.log(`You are now connected to the database.`)
+// )
+
+// pool.connect();
 
 const homeProductRoute = async (req, res) => {
     try {
@@ -131,6 +143,6 @@ const confirmRoute = (req, res) => {
     }
 }
 
-module.exports = { homeProductRoute, categoryRoutes, paymentRoute, confirmRoute }
+module.exports = { homeProductRoute, categoryRoutes, paymentRoute, confirmRoute, pool }
 
 
