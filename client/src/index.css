@@ -65,3 +65,40 @@ img {
     background-color: #005F73;
     transition: 0.3s;
 }
+
+
+@media only screen and (max-width: 1200px) {
+    .filter-btn-container a {
+        font-size: 1rem
+    }
+
+    .home-section h3,
+    .filter-section h3,
+    .cart-section h3 {
+        font-size: 1.2rem;
+    }
+
+    .home-section p,
+    .filter-section p,
+    .cart-section p {
+        font-size: 0.9rem;
+    }
+
+}
+
+
+@media only screen and (max-width: 768px) {
+    .filter-btn-container a {
+        font-size: 0.8rem;
+        margin: 0 10px;
+    }
+
+    .home-section h3,
+    .filter-section h3 {
+        font-size: 1.1rem;
+    }
+
+    .home-section p {
+        font-size: 0.8rem;
+    }
+}

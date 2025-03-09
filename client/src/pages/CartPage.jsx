@@ -29,7 +29,7 @@ const CartPage = () => {
 
     console.log(cart)
     return (
-        <section>
+        <section className='cart-section'>
             <div className="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
                 <div className="md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0">
                     {cart === undefined ? <p>Cart is empty</p> : Object.values(cart).map(product => (
