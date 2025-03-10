@@ -9,8 +9,6 @@ https://ecommerce-marketplace-tqzf.onrender.com/
 - Payment Declined (insufficient funds): 4000 0000 0000 9995
 - Card Expired: 4000 0000 0000 0069
 - Incorrect CVC: 4000 0000 0000 0127
-- Card Reported as Stolen: 4000 0000 0000 0259
-- 3D Secure Authentication Required: 4000 0000 0000 0100
 
 ## Description
 
