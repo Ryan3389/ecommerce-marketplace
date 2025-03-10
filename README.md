@@ -10,6 +10,15 @@ https://ecommerce-marketplace-tqzf.onrender.com/
 - Card Expired: 4000 0000 0000 0069
 - Incorrect CVC: 4000 0000 0000 0127
 
+Testing information: 
+- Country: Canada
+- Card (Successful payment): 4242 4242 4242 4242
+- Postal Code: M5A 1A1 (Toronto)
+- Expiry date: Any future date (ex: 12/25)
+- CSV: Any 3 digit number (ex: 123)
+
+
+
 ## Description
 
 - Shop and browse through a variety of categories
